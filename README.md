@@ -62,7 +62,7 @@ Contributions are welcome! Please follow these steps:
 5. Open a Pull Request.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/dhananjayaDev/human-detection-dvr?tab=MIT-1-ov-file) file for details.
 
 ## Contact
 For questions or support, please open an issue or contact the maintainer at [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](https://www.linkedin.com/in/dhananjayadissanayake/).
