@@ -1,0 +1,10 @@
+^D:\PROJECTS\CV_APP_LINE\HUMAN_DETECTION_DVR\CPP\CMAKEFILES\F33E6DC334DDC1086C3AAF54A1952ED2\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/projects/cv_app_line/human_detection_dvr -BD:/projects/cv_app_line/human_detection_dvr/cpp --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/projects/cv_app_line/human_detection_dvr/cpp/HumanDetectionDVR.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -7,14 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find required packages
 find_package(OpenCV REQUIRED)
 find_package(PkgConfig REQUIRED)
-find_package(jsoncpp REQUIRED)
+find_package(jsoncpp CONFIG REQUIRED)
+find_package(cppzmq CONFIG REQUIRED)
+find_package(zeromq CONFIG REQUIRED)
 
-# Find ZMQ
-pkg_check_modules(ZMQ REQUIRED libzmq)
-
-# Include directories
-include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories(${ZMQ_INCLUDE_DIRS})
+# include_directories(${OpenCV_INCLUDE_DIRS})
+# include_directories(${ZMQ_INCLUDE_DIRS})
 include_directories(include)
 
 # Source files
@@ -30,8 +28,9 @@ add_executable(video_capture ${SOURCES})
 # Link libraries
 target_link_libraries(video_capture 
     ${OpenCV_LIBS}
-    ${ZMQ_LIBRARIES}
-    jsoncpp
+    cppzmq
+    libzmq
+    JsonCpp::JsonCpp
 )
 
 # Compiler flags
@@ -45,4 +44,4 @@ set_target_properties(video_capture PROPERTIES
 # Print configuration info
 message(STATUS "OpenCV version: ${OpenCV_VERSION}")
 message(STATUS "ZMQ version: ${ZMQ_VERSION}")
-message(STATUS "Build type: ${CMAKE_BUILD_TYPE}") 
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")

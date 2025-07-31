@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/projects/cv_app_line/human_detection_dvr/cpp/cmake_install.cmake",
+		"D:/projects/cv_app_line/human_detection_dvr/cpp/cpp/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

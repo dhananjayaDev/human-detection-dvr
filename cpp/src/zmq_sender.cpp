@@ -1,6 +1,7 @@
 #include "zmq_sender.h"
 #include <iostream>
 #include <opencv2/imgcodecs.hpp>
+#include <json/json.h>
 
 ZMQSender::ZMQSender(const std::string& address)
     : context_(1), address_(address), connected_(false) {
@@ -37,7 +38,7 @@ bool ZMQSender::send_frame(const cv::Mat& frame) {
         zmq::message_t message(buffer.size());
         memcpy(message.data(), buffer.data(), buffer.size());
         
-        return socket_->send(message, zmq::send_flags::none);
+        return socket_->send(message, zmq::send_flags::none).has_value();
     } catch (const zmq::error_t& e) {
         std::cerr << "ZMQ send error: " << e.what() << std::endl;
         return false;
@@ -72,4 +73,5 @@ bool ZMQSender::serialize_frame(const cv::Mat& frame, std::vector<uchar>& buffer
         std::cerr << "Frame serialization error: " << e.what() << std::endl;
         return false;
     }
-} 
+}
+

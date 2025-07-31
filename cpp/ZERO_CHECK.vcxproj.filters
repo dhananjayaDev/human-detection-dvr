@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\projects\cv_app_line\human_detection_dvr\cpp\CMakeFiles\f33e6dc334ddc1086c3aaf54a1952ed2\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{9B625321-C67E-3658-A10D-A1F51D723385}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

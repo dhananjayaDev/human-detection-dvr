@@ -2,6 +2,7 @@
 #include <iostream>
 #include <signal.h>
 #include <json/json.h>
+#include <fstream>
 
 static bool running = true;
 
@@ -71,20 +72,21 @@ int main(int argc, char* argv[]) {
         config_file = argv[1];
     }
     
+    std::cout << "Starting main..." << std::endl;
     if (!load_config(capture, config_file)) {
         std::cout << "Using default configuration" << std::endl;
     }
-    
+    std::cout << "Config loaded, initializing capture..." << std::endl;
     // Initialize video capture
     if (!capture.initialize()) {
         std::cerr << "Failed to initialize video capture" << std::endl;
         return 1;
     }
-    
+    std::cout << "Initialization successful, running capture..." << std::endl;
     // Run the capture loop
     std::cout << "Press Ctrl+C to stop" << std::endl;
     capture.run();
     
     std::cout << "Video capture component stopped" << std::endl;
     return 0;
-} 
+}

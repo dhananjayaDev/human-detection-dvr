@@ -1,0 +1,3 @@
+D:/projects/cv_app_line/human_detection_dvr/cpp/CMakeFiles/ALL_BUILD.dir
+D:/projects/cv_app_line/human_detection_dvr/cpp/CMakeFiles/ZERO_CHECK.dir
+D:/projects/cv_app_line/human_detection_dvr/cpp/cpp/CMakeFiles/video_capture.dir

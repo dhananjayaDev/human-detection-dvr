@@ -1,0 +1,38 @@
+# Build and binary files
+cpp/build/
+*.exe
+*.out
+*.o
+*.obj
+*.dll
+*.so
+*.a
+*.lib
+
+# Python virtual environments
+python/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pydcmake --version
+
+# Logs
+logs/
+*.log
+
+# Model files and large data
+python/detection/*.pt
+python/detection/*.pth
+models/
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
