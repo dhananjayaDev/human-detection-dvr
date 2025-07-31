@@ -65,4 +65,4 @@ Contributions are welcome! Please follow these steps:
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
-For questions or support, please open an issue or contact the maintainer at [dhananjaya.dev@email.com](mailto:dhananjaya.dev@email.com).
+For questions or support, please open an issue or contact the maintainer at [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](https://www.linkedin.com/in/dhananjayadissanayake/).
