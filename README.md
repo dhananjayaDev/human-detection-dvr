@@ -3,20 +3,23 @@
 ![Banner Image](https://github.com/dhananjayaDev/human-detection-dvr/blob/master/HDDDVR%20Bannner.png)
 
 ## Overview
-This repository contains the source code and documentation for a Human Detection DVR (Digital Video Recorder) system. The project aims to implement real-time human detection using computer vision techniques, integrated with a DVR system for surveillance and monitoring purposes.
+This repository contains the source code for a Human Detection DVR (Digital Video Recorder) system. The project implements real-time human detection using computer vision techniques, integrated with a DVR system for surveillance and monitoring purposes. It leverages a decoupled architecture with C++ for video capture and Python for human detection and alerting, communicating via ZeroMQ.
 
 ## Features
-- **Real-Time Human Detection**: Utilizes advanced computer vision algorithms to detect humans in video feeds.
-- **DVR Integration**: Seamlessly records and stores video footage with human detection events.
-- **Customizable Alerts**: Configurable notifications for detected human activities.
-- **User-Friendly Interface**: Simple and intuitive UI for managing recordings and settings.
+- **Real-Time Human Detection**: Utilizes YOLOv5, a state-of-the-art object detection model, to detect humans in live video feeds.
+- **Modular Architecture**: Separates video capture (C++) from human detection and alerting (Python) using ZeroMQ for efficient inter-process communication.
+- **Configurable Alerts**: Sends real-time alerts with snapshots to Telegram upon human detection, with a customizable cooldown period.
+- **Flexible Video Input**: Captures video from various sources via OpenCV, allowing for different camera setups.
+- **Customizable Detection Parameters**: Allows configuration of detection confidence thresholds and Telegram alert settings via JSON files.
 
 ## Requirements
 - Python 3.8+
 - OpenCV
-- TensorFlow or PyTorch (depending on the model used)
-- FFmpeg for video processing
-- A compatible DVR hardware or software setup
+- PyTorch (for YOLOv5)
+- ZeroMQ libraries (for inter-process communication)
+- Telegram Bot API (for alerts)
+- FFmpeg (for video processing, if applicable for DVR hardware/software)
+- A compatible camera or video source
 
 ## Installation
 1. Clone the repository:
@@ -24,33 +27,56 @@ This repository contains the source code and documentation for a Human Detection
    git clone https://github.com/dhananjayaDev/human-detection-dvr.git
    cd human-detection-dvr
    ```
-2. Install dependencies:
+2. Install Python dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install -r python/requirements.txt
    ```
-3. Configure the DVR settings in `config.yaml` (create this file based on `config.example.yaml`).
-4. Run the application:
+3. Build the C++ component (requires CMake and a C++ compiler, e.g., g++ or MSVC):
    ```bash
-   python main.py
+   # Example for Linux
+   cd cpp
+   mkdir build
+   cd build
+   cmake ..
+   make
+   # For Windows, use Visual Studio to open HumanDetectionDVR.sln and build
    ```
+4. Configure the system:
+   - Edit `config/camera_config.json` for camera settings (index, resolution, FPS).
+   - Edit `config/detection_config.json` for detection parameters (confidence threshold, Telegram bot token, chat ID, alert cooldown).
 
 ## Usage
-- Launch the application using the command above.
-- Access the web interface at `http://localhost:5000` (or the configured port).
-- Configure detection parameters and DVR settings through the interface.
-- Monitor real-time detection and review recorded footage.
+1. Start the C++ video capture component (from the `cpp/build` directory after building):
+   ```bash
+   ./video_capture_executable
+   ```
+   (The exact executable name might vary based on your build system, e.g., `HumanDetectionDVR` on Windows)
+2. Start the Python human detection component (from the root `human-detection-dvr` directory):
+   ```bash
+   python python/detection/human_detector.py
+   ```
+3. Monitor real-time human detection in the OpenCV display window (if enabled) and receive Telegram alerts.
 
 ## Project Structure
 ```
 human-detection-dvr/
-├── config.example.yaml      # Example configuration file
-├── main.py                 # Entry point for the application
-├── requirements.txt        # Python dependencies
-├── src/                    # Source code
-│   ├── detection/          # Human detection logic
-│   ├── dvr/                # DVR integration module
-│   └── ui/                 # User interface components
-└── docs/                   # Documentation
+├── config/                 # Configuration files (JSON)
+│   ├── camera_config.json  # Camera settings
+│   └── detection_config.json # Detection and alert settings
+├── cpp/                    # C++ Video Capture Component
+│   ├── include/            # Header files
+│   ├── src/                # Source files (video_capture, zmq_sender)
+│   └── CMakeLists.txt      # CMake build script
+├── python/                 # Python Human Detection Component
+│   ├── detection/          # Core detection logic
+│   │   ├── human_detector.py # Main detection script (YOLOv5, ZMQ receiver, Telegram alert)
+│   │   ├── zmq_receiver.py   # ZeroMQ frame receiver
+│   │   └── telegram_alert.py # Telegram alert sender
+│   └── requirements.txt    # Python dependencies
+├── scripts/                # Utility scripts (e.g., run_system.py, yolov5su.pt)
+├── vcpkg/                  # C++ package manager (if used for dependencies)
+├── HDDDVR Bannner.png      # Banner image for README
+└── README.md               # This README file
 ```
 
 ## Contributing
@@ -66,3 +92,5 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 ## Contact
 For questions or support, please open an issue or contact the maintainer at [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](https://www.linkedin.com/in/dhananjayadissanayake/).
+
+
