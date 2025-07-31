@@ -20,7 +20,7 @@ class SystemRunner:
     def start_cpp_component(self):
         """Start the C++ video capture component"""
         try:
-            cpp_executable = Path("cpp/build/video_capture")
+            cpp_executable = Path("../cpp/Debug/video_capture.exe")
             if not cpp_executable.exists():
                 self.logger.error(f"C++ executable not found: {cpp_executable}")
                 return False
@@ -40,7 +40,7 @@ class SystemRunner:
     def start_python_component(self):
         """Start the Python detection component"""
         try:
-            python_script = Path("python/detection/human_detector.py")
+            python_script = Path("../python/detection/human_detector.py")
             if not python_script.exists():
                 self.logger.error(f"Python script not found: {python_script}")
                 return False
@@ -107,6 +107,14 @@ class SystemRunner:
         except KeyboardInterrupt:
             print("\nShutting down system...")
         finally:
+            if self.cpp_process:
+                out, err = self.cpp_process.communicate()
+                print("C++ stdout:", out.decode())
+                print("C++ stderr:", err.decode())
+            if self.python_process:
+                out, err = self.python_process.communicate()
+                print("Python stdout:", out.decode())
+                print("Python stderr:", err.decode())
             self.stop_components()
             print("System stopped")
 
@@ -121,4 +129,4 @@ def main():
     runner.run()
 
 if __name__ == "__main__":
-    main() 
+    main()
